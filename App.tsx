@@ -32,6 +32,9 @@ const WelcomeScreen:React.FC<NavProps> = ({ navigation }) => {
         <Text style={{color: 'black', fontWeight: 'bold', fontSize: 24, textAlign: 'center'}}>
           {'\n'}You can type text in below box and click button to get random number generated from character count of your text.{'\n'}
         </Text>
+        <Text style={{color: 'black', fontWeight: 'bold', fontSize: 18, padding: 0, textAlign: 'center'}}>
+          <Text>Character Count: </Text>{count}
+        </Text>
       </Text>
       <TextInput
         multiline={true}
