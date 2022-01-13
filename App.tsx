@@ -1,4 +1,5 @@
-// Takes text input and then on clicking a button gives character count on other screen and data is shown after some timeout and if request is sent then on clicking show error.
+// Takes text input and then on clicking a button gives character count on other screen and data is shown
+// after some timeout and if request is sent then on clicking show error.
 
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
@@ -7,24 +8,27 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-let val = 0;
 let i = 0;
 
 interface NavProps {
   navigation: NavigationProp<ParamListBase>;
+  route: any;
 }
 
 const WelcomeScreen:React.FC<NavProps> = ({ navigation }) => {
   const [finp, setFinp] = useState<string>(''); //Force inputs the updated vale of text box
   const [count, setCount] = useState<number>(0); //Gives character count
   const handleClick = () => {
-    navigation.navigate('Result');
+    navigation.navigate('Result',
+    {
+      val: count
+    }
+    );
     i = 0;
-    val = count;
   }
   
   return (
-    <View style={{paddingTop: 50, backgroundColor: '#f0ca62', paddingBottom: 275}}>
+    <View style={{paddingTop: 50, backgroundColor: '#FFF176', paddingBottom: 275}}>
       <Text style={{textAlign: 'center'}}>
         <Text style={{color: 'black', fontWeight: 'bold', fontSize: 24, textAlign: 'center'}}>
           Welcome to Home Screen.
@@ -67,12 +71,12 @@ const WelcomeScreen:React.FC<NavProps> = ({ navigation }) => {
   )
 }
 
-const ResultScreen:React.FC<NavProps> = ({ navigation }) => {
+const ResultScreen:React.FC<NavProps> = ({ route }) => {
 
+  let { val } = route.params;
   const [display, setDisplay] = useState<string>('Waiting...');
-
   if(!i){
-    
+    console.log(val);
     let time = Math.floor(Math.random() * (val*10 - ((val-50)*10) + 1) + ((val-50)*10));
     if(time<0){
       time = time*(-1);
@@ -115,7 +119,7 @@ const ResultScreen:React.FC<NavProps> = ({ navigation }) => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='Welcome'>
         <Stack.Screen
           name="Welcome"
           component={WelcomeScreen}
