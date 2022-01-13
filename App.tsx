@@ -41,7 +41,6 @@ const WelcomeScreen:React.FC<NavProps> = ({ navigation }) => {
         value={finp}
         onChangeText={(value)=>{
           setFinp(value);
-          val = value.length;
           setCount(value.length);
         }}
         style={{
@@ -73,7 +72,7 @@ const ResultScreen:React.FC<NavProps> = ({ navigation }) => {
   const [display, setDisplay] = useState<string>('Waiting...');
 
   if(!i){
-
+    
     let time = Math.floor(Math.random() * (val*10 - ((val-50)*10) + 1) + ((val-50)*10));
     if(time<0){
       time = time*(-1);
