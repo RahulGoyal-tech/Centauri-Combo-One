@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Pressable, TextInput } from 'react-native';
-import { NavigationContainer, NavigationProp, ParamListBase, StackActions } from '@react-navigation/native';
+import { NavigationContainer, NavigationProp, ParamListBase } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
@@ -20,15 +20,15 @@ const WelcomeScreen:React.FC<NavProps> = ({ navigation }) => {
   const [count, setCount] = useState<number>(0); //Gives character count
   const handleClick = () => {
     navigation.navigate('Result',
-    {
-      val: count
-    }
+      {
+        val: count
+      }
     );
     i = 0;
   }
   
   return (
-    <View style={{paddingTop: 50, backgroundColor: '#FFF176', paddingBottom: 275}}>
+    <View style={{ backgroundColor: '#FFF176', height: '100%', paddingTop: 50}}>
       <Text style={{textAlign: 'center'}}>
         <Text style={{color: 'black', fontWeight: 'bold', fontSize: 24, textAlign: 'center'}}>
           Welcome to Home Screen.
@@ -76,7 +76,6 @@ const ResultScreen:React.FC<NavProps> = ({ route }) => {
   let { val } = route.params;
   const [display, setDisplay] = useState<string>('Waiting...');
   if(!i){
-    console.log(val);
     let time = Math.floor(Math.random() * (val*10 - ((val-50)*10) + 1) + ((val-50)*10));
     if(time<0){
       time = time*(-1);
